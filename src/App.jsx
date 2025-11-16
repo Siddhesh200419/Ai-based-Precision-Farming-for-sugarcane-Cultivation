@@ -116,7 +116,7 @@ function App() {
           <img
             src={noob}
             alt="AVCOE Logo"
-            className="h-20 w-25 object-contain rounded-full bg-white p-1;"
+            className="h-20 w-25 object-contain rounded-full bg-white p-1 cursor-pointer"
           />
         </div>
 
@@ -234,7 +234,7 @@ function App() {
           <img
             src={mpkvLogo}
             alt="MPKV Logo"
-            className="h-20 w-auto object-contain rounded-full"
+            className="h-20 w-auto object-contain rounded-full cursor-pointer"
           />
         </div>
       </div>
