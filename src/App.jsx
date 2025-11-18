@@ -4,7 +4,7 @@ import mpkvLogo from "./assets/mpkv.png";
 // import sid from "./assets/newimage.jpeg";
 import noob from "./assets/noob.png";
 function App() {
-  const [activeTab, setActiveTab] = useState("disease-detection");
+  const [activeTab, setActiveTab] = useState("automation");
   const [expandedAccordion, setExpandedAccordion] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
