@@ -4,7 +4,7 @@ import mpkvLogo from "./assets/mpkv.png";
 // import sid from "./assets/newimage.jpeg";
 import noob from "./assets/noob.png";
 function App() {
-  const [activeTab, setActiveTab] = useState("automation");
+  const [activeTab, setActiveTab] = useState("disease-detection");
   const [expandedAccordion, setExpandedAccordion] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -760,55 +760,28 @@ function App() {
 
     <div className="space-y-3">
       {[
-        {
-          q: "What is this project actually about?",
-          a: "It’s an AI-powered platform that helps sugarcane farmers detect diseases early, track crop health, and get smart recommendations for irrigation, fertilizer, and pest control.",
-        },
-        // {
-        //   q: "Who is developing this project?",
-        //   a: "This project is a collaborative effort between Amrutvahini College of Engineering (AVCOE) and Mahatma Phule Krishi Vidyapeeth (MPKV).",
-        // },
-        {
-          q: "What problem does this system solve?",
-          a: "Farmers struggle with late disease detection, unpredictable weather, nutrient deficiencies, and inefficient resource usage. This system solves those issues using AI, satellite imagery, and real-time insights.",
-        },
-        {
-          q: "How does the AI detect sugarcane diseases?",
-          a: "The system uses deep learning models like EfficientNet and Vision Transformer to analyze leaf images and satellite vegetation data, accurately identifying diseases such as red rot, rust, and mosaic.",
-        },
-        {
-          q: "Do farmers need technical knowledge to use this?",
-          a: "Not at all. The app is super simple, mobile-friendly, and designed for farmers with basic smartphone skills.",
-        },
-        {
-          q: "What technologies are used in this project?",
-          a: "The system uses AI/ML models, satellite imagery APIs, weather APIs, a Python/Flask backend, a Flutter mobile app, Firebase database, and Explainable AI for transparency.",
-        },
-        {
-          q: "Can this system work offline?",
-          a: "Yes, farmers can view previous reports offline. But disease detection and real-time weather recommendations require an internet connection.",
-        },
-        {
-          q: "Is this project only for sugarcane?",
-          a: "Yes, the current version is fully optimized for sugarcane. But the system is scalable and can be adapted for other crops in the future.",
-        },
-        {
-          q: "How accurate is the disease prediction?",
-          a: "Our AI models target 90%+ accuracy depending on image quality, weather conditions, and field variations.",
-        },
-        {
-          q: "Is this platform free for farmers?",
-          a: "Yes, currently it’s free as this is a research-based academic project. Future versions may extend into larger deployments.",
-        },
-        {
-          q: "How does the AVCOE–MPKV collaboration help?",
-          a: "AVCOE handles AI, software development, and backend systems, while MPKV provides agricultural expertise, datasets, and validation.",
-        },
-        {
-          q: "Will this project help in real-world farming?",
-          a: "Absolutely. The system improves crop health monitoring, reduces resource wastage, increases yield, and supports sustainable agriculture."
-        },
-      ].map((item, idx) => (
+  {
+    q: "What is this project actually about?",
+    a: "It’s an AI-powered platform that helps sugarcane farmers detect diseases early, monitor crop health, and get actionable recommendations for irrigation, fertilizer, and pest control."
+  },
+  {
+    q: "What problem does this system solve?",
+    a: "It tackles late disease detection, inefficient irrigation/fertilizer use, and unpredictable weather impacts by combining AI, satellite data, and field inputs to deliver timely, data-driven advice."
+  },
+  {
+    q: "How does the AI detect sugarcane diseases?",
+    a: "We use trained deep-learning models (e.g. EfficientNet / Vision Transformer) on leaf images, combined with satellite NDVI and weather signals — outputs include disease labels, heatmaps, and confidence scores."
+  },
+  {
+    q: "Do farmers need technical knowledge to use this?",
+    a: "Nope. The Flutter mobile app is farmer-friendly, supports regional languages, and works offline for viewing recent reports — uploading images and receiving alerts is easy."
+  },
+  {
+    q: "Will this project help in real-world farming?",
+    a: "Yes — pilot deployments aim to reduce input waste, detect problems earlier, and improve yields by giving farmers clear, field-level actions they can follow."
+  }
+]
+.map((item, idx) => (
         <div
           key={idx}
           className={`bg-white rounded-xl border transition-all duration-500 ${
