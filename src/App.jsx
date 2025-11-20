@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import mpkvLogo from "./assets/mpkv.png";
-// import newimage from "./assets/images.png";
-// import sid from "./assets/newimage.jpeg";
 import noob from "./assets/noob.png";
+
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("disease-detection");
   const [expandedAccordion, setExpandedAccordion] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -68,6 +68,11 @@ function App() {
   ];
 
   useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 1800);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
@@ -90,6 +95,130 @@ function App() {
   const toggleAccordion = (index) => {
     setExpandedAccordion(expandedAccordion === index ? null : index);
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <style>{`
+          .loader-container {
+            width: 250px;
+            height: 250px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+          }
+
+          .loader-cloud {
+            width: 250px;
+          }
+
+          .loader-front {
+            padding-top: 45px;
+            margin-left: 25px;
+            display: inline;
+            position: absolute;
+            z-index: 11;
+            animation: loader-clouds 8s infinite;
+            animation-timing-function: ease-in-out;
+          }
+
+          .loader-back {
+            margin-top: -30px;
+            margin-left: 150px;
+            z-index: 12;
+            animation: loader-clouds 12s infinite;
+            animation-timing-function: ease-in-out;
+          }
+
+          .loader-right-front,
+          .loader-left-front,
+          .loader-right-back,
+          .loader-left-back {
+            background-color: #4c9beb;
+            display: inline-block;
+            z-index: 5;
+          }
+
+          .loader-right-front {
+            width: 45px;
+            height: 45px;
+            border-radius: 50% 50% 50% 0%;
+            margin-left: -25px;
+          }
+
+          .loader-left-front {
+            width: 65px;
+            height: 65px;
+            border-radius: 50% 50% 0% 50%;
+          }
+
+          .loader-right-back {
+            width: 50px;
+            height: 50px;
+            border-radius: 50% 50% 50% 0%;
+            margin-left: -20px;
+          }
+
+          .loader-left-back {
+            width: 30px;
+            height: 30px;
+            border-radius: 50% 50% 0% 50%;
+          }
+
+          .loader-sun {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(to right, #fcbb04, #fffc00);
+            border-radius: 60px;
+            display: inline;
+            position: absolute;
+          }
+
+          .loader-sunshine {
+            animation: loader-sunshines 2s infinite;
+          }
+
+          @keyframes loader-sunshines {
+            0% {
+              transform: scale(1);
+              opacity: 0.6;
+            }
+            100% {
+              transform: scale(1.4);
+              opacity: 0;
+            }
+          }
+
+          @keyframes loader-clouds {
+            0% {
+              transform: translateX(15px);
+            }
+            50% {
+              transform: translateX(0px);
+            }
+            100% {
+              transform: translateX(15px);
+            }
+          }
+        `}</style>
+
+        <div className="loader-container">
+          <div className="loader-cloud loader-front">
+            <span className="loader-left-front"></span>
+            <span className="loader-right-front"></span>
+          </div>
+          <span className="loader-sun loader-sunshine"></span>
+          <span className="loader-sun"></span>
+          <div className="loader-cloud loader-back">
+            <span className="loader-left-back"></span>
+            <span className="loader-right-back"></span>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -183,27 +312,30 @@ function App() {
       `}</style>
 
       {/* Header */}
-      <div className="fixed top-4 left-1/2 transform -translate-x-1/2 w-[95%] max-w-6xl z-50 flex items-center justify-center gap-4">
+      <div className="fixed top-3 left-1/2 transform -translate-x-1/2 w-[94%] max-w-6xl z-50 flex items-center justify-between gap-2 sm:gap-4">
         {/* Left Logo - Outside navbar */}
-        <div className="flex items-center ">
+        <div className="flex items-center shrink-0">
           <img
             src={noob}
             alt="AVCOE Logo"
-            className="h-20 w-25 object-contain rounded-full bg-white p-1 cursor-pointer"
+            className="h-14 w-14 sm:h-20 sm:w-20 object-contain rounded-full bg-white p-1 cursor-pointer shadow-lg"
           />
         </div>
 
         {/* Navbar */}
         <header
-          className={`flex-1 backdrop-blur-xl rounded-3xl border transition-all duration-500 ${
+          className={`relative flex-1 min-w-0 backdrop-blur-xl rounded-3xl border transition-all duration-500 ${
             scrolled
               ? "bg-white/95 shadow-2xl border-gray-200"
               : "bg-white/80 shadow-lg border-gray-100"
           }`}
         >
-          <div className="h-16 flex items-center justify-between px-6 lg:px-8">
-            <div className="text-xl lg:text-2xl font-bold text-green-800">
-            CaneIQ
+          <div className="h-14 sm:h-16 flex items-center justify-between px-4 sm:px-6 lg:px-8">
+            <div
+              className="text-lg sm:text-xl lg:text-2xl font-bold text-green-800 cursor-pointer truncate"
+              onClick={() => (window.location.href = "#product")}
+            >
+              CaneIQ
             </div>
             <nav className="hidden md:flex gap-6 lg:gap-8 items-center">
               <a
@@ -231,17 +363,17 @@ function App() {
                 About
               </a>
             </nav>
-            <div className="flex items-center gap-3 lg:gap-4">
-              <button className="hidden sm:block bg-white text-green-800 border border-gray-300 px-5 py-2 rounded-lg font-medium text-sm lg:text-base hover:border-gray-400 hover:bg-gray-50 transition-all">
+            <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
+              {/* <button className="hidden sm:block bg-white text-green-800 border border-gray-300 px-5 py-2 rounded-lg font-medium text-sm lg:text-base hover:border-gray-400 hover:bg-gray-50 transition-all">
                 Sign in
-              </button>
-              <button className="bg-green-800 text-white px-4 sm:px-5 py-2 rounded-lg font-medium text-sm lg:text-base hover:bg-green-700 transition-all">
-                <span className="hidden sm:inline">Request a Demo</span>
-                <span className="sm:hidden">Demo</span>
+              </button> */}
+              <button className="hidden md:inline-flex bg-green-800 text-white px-4 sm:px-5 py-2 rounded-lg font-medium text-sm lg:text-base hover:bg-green-700 transition-all">
+                Request a Demo
               </button>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden text-green-800 p-2"
+                className="md:hidden text-green-800 p-2 rounded-lg border border-green-100"
+                aria-label="Toggle navigation"
               >
                 <svg
                   className="w-6 h-6"
@@ -269,51 +401,50 @@ function App() {
             </div>
           </div>
           {mobileMenuOpen && (
-            <div className="md:hidden border-t border-gray-100 px-6 py-4 space-y-3">
-              <a
-                href="#features"
-                className="block text-base font-medium text-green-800 hover:text-green-600 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
+            <div className="md:hidden absolute left-0 right-0 top-[calc(100%+0.5rem)] border border-gray-100 px-6 py-4 space-y-3 bg-white rounded-3xl shadow-2xl z-20">
+              {[
+                { href: "#product", label: "Product" },
+                { href: "#features", label: "Features" },
+                { href: "#data", label: "Data" },
+                { href: "#about", label: "About" },
+              ].map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="block text-base font-medium text-green-800 hover:text-green-600 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </a>
+              ))}
+              <button
+                className="w-full mt-4 bg-green-800 text-white py-3 rounded-2xl font-semibold shadow-md hover:bg-green-700 transition-all"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  window.location.href = "#contact";
+                }}
               >
-                Product
-              </a>
-              <a
-                href="#solutions"
-                className="block text-base font-medium text-green-800 hover:text-green-600 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Features
-              </a>
-              <a
-                href="#about"
-                className="block text-base font-medium text-green-800 hover:text-green-600 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Pricing
-              </a>
-              <a
-                href="#contact"
-                className="block text-base font-medium text-green-800 hover:text-green-600 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Resources
-              </a>
+                Request a Demo
+              </button>
             </div>
           )}
         </header>
 
         {/* Right Logo - Outside navbar */}
-        <div className="flex items-center">
+        <div className="flex items-center shrink-0">
           <img
             src={mpkvLogo}
             alt="MPKV Logo"
-            className="h-20 w-auto object-contain rounded-full cursor-pointer"
+            className="h-14 w-14 sm:h-20 sm:w-20 object-contain rounded-full cursor-pointer shadow-lg bg-white p-1"
           />
         </div>
       </div>
 
       {/* Hero Section */}
-      <section className="relative bg-green-800 text-white pt-24 pb-12 lg:pt-28 lg:pb-20 px-8 lg:px-16 overflow-hidden">
+      <section
+        id="product"
+        className="relative bg-green-800 text-white pt-24 pb-12 lg:pt-28 lg:pb-20 px-8 lg:px-16 overflow-hidden"
+      >
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-72 h-72 bg-green-400 opacity-10 rounded-full blur-3xl animate-float"></div>
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-green-400 opacity-10 rounded-full blur-3xl animate-float-delayed"></div>
@@ -350,7 +481,10 @@ function App() {
       </section>
 
       {/* Partnership Carousel */}
-      <section className="bg-gradient-to-r from-green-50 via-white to-green-50 pt-10 pb-12 lg:pt-14 lg:pb-16 px-4 sm:px-8 lg:px-16">
+      <section
+        id="about"
+        className="bg-gradient-to-r from-green-50 via-white to-green-50 pt-10 pb-12 lg:pt-14 lg:pb-16 px-4 sm:px-8 lg:px-16"
+      >
         <div className="max-w-7xl mx-auto">
           <div className="bg-[#dbf6e9]/70 border shadow-2xl shadow-green-900/10 rounded-[36px] px-6 sm:px-10 py-12 sm:py-14">
             <div className="text-center max-w-5xl mx-auto">
@@ -444,7 +578,7 @@ function App() {
       </section>
 
       {/* Tabs */}
-      <section className="bg-white py-16 lg:py-24 px-8 lg:px-16">
+      <section id="features" className="bg-white py-16 lg:py-24 px-8 lg:px-16">
   <div className="max-w-7xl mx-auto">
     <h2 className="text-3xl md:text-4xl font-semibold text-green-800 mb-8 animate-on-scroll opacity-0 transform translate-y-8">
       Key Features — CaneIQ
@@ -655,10 +789,13 @@ function App() {
 
 
       {/* Feature Cards */}
-      <section className="bg-gray-50 py-16 lg:py-24 px-8 lg:px-16">
+      <section
+        id="data"
+        className="bg-gray-50 py-16 lg:py-24 px-8 lg:px-16"
+      >
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-semibold text-green-800 mb-12 animate-on-scroll opacity-0 transform translate-y-8">
-            Feature Cards
+            Data & Insights
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {[
