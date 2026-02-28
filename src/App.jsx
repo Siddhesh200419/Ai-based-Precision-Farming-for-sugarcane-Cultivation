@@ -335,7 +335,7 @@ function App() {
               className="text-lg sm:text-xl lg:text-2xl font-bold text-green-800 cursor-pointer truncate"
               onClick={() => (window.location.href = "#product")}
             >
-              CaneIQ
+              FarmIQ
             </div>
             <nav className="hidden md:flex gap-6 lg:gap-8 items-center">
               <a
